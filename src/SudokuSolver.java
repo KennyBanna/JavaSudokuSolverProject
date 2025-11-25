@@ -38,6 +38,8 @@ public interface SudokuSolver {
 
     /**
      * Clears all digits in the sudoku.
+     * 
+     * hhhhhhh
      */
     void clearAll();
 
