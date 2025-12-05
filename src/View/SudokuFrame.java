@@ -12,7 +12,7 @@ public class SudokuFrame {
     private JFrame SudokuFrame;
 
     public SudokuFrame() {
-        SudokuFrame = new JFrame("Sudkolösare");
+        SudokuFrame = new JFrame("Sudokulösare");
 
         JPanel testPanel = new JPanel();
         testPanel.setPreferredSize(new Dimension(600, 400));
