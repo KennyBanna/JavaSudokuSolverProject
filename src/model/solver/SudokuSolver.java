@@ -1,3 +1,5 @@
+package model.solver;
+
 public interface SudokuSolver {
     /**
      * Solves the sudoku.

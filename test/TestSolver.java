@@ -9,9 +9,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-// Make sure that the imports are correct.
-import solver.MySudokuSolver;
-import solver.SudokuSolver;
+import model.solver.MySudokuSolver;
+import model.solver.SudokuSolver;
 
 public class TestSolver {
     private SudokuSolver solver;
