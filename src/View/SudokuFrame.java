@@ -14,16 +14,17 @@ public class SudokuFrame {
     public SudokuFrame() {
         SudokuFrame = new JFrame("Sudokulösare");
 
-        JPanel testPanel = new JPanel();
-        testPanel.setPreferredSize(new Dimension(600, 400));
+        JPanel sudokuPanel = new SudokuPanel().getComponent();
+        sudokuPanel.setPreferredSize(new Dimension(600, 400));
 
         SudokuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        SudokuFrame.add(testPanel);
+        SudokuFrame.add(sudokuPanel);
         SudokuFrame.setVisible(true);
         SudokuFrame.pack();
         centerWindow();
     }
 
+  
     private void centerWindow() {
 
         int width = SudokuFrame.getWidth();
