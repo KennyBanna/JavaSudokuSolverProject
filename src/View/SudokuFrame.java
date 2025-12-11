@@ -1,44 +1,20 @@
 package View;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Toolkit;
-
-public class SudokuFrame {
-
-    private JFrame SudokuFrame;
+public class SudokuFrame extends JFrame {
 
     public SudokuFrame() {
-        SudokuFrame = new JFrame("Sudokulösare");
+        super("Sudokulösare");
 
-        JPanel sudokuPanel = new SudokuPanel().getComponent();
+        SudokuPanel sudokuPanel = new SudokuPanel();
         sudokuPanel.setPreferredSize(new Dimension(600, 400));
 
-        SudokuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        SudokuFrame.add(sudokuPanel);
-        SudokuFrame.setVisible(true);
-        SudokuFrame.pack();
-        centerWindow();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(sudokuPanel);
+        pack();
+        setLocationRelativeTo(null); // centrera
+        setVisible(true);
     }
-
-  
-    private void centerWindow() {
-
-        int width = SudokuFrame.getWidth();
-        int height = SudokuFrame.getHeight();
-
-        int screenW = Toolkit.getDefaultToolkit().getScreenSize().width;
-        int screenH = Toolkit.getDefaultToolkit().getScreenSize().height;
-
-        int posX = screenW / 2 - width / 2;
-        int posY = screenH / 2 - height / 2;
-
-        SudokuFrame.setLocation(new Point(posX, posY));
-
-        System.out.printf("%s, %s, %s, %s", width, height, screenW, screenH);
-    };
-
 }
