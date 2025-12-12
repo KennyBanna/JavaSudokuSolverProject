@@ -6,8 +6,19 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public boolean solve() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'solve'");
+        if (!isAllValid()) {
+            return false;
+        }
+
+        for (int i = 1; i <= 9; i++) {
+
+        }
+        return true;
+    }
+
+    // rekursiv hjälpmetod
+    private boolean solve(int row, int col) {
+        return false;
     }
 
     @Override
@@ -38,13 +49,67 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public boolean isValid(int row, int col) {
+        // Kollar om en specifik siffra i boardet är valid
+        // dvs om den är unik i rad, kolumn och 3x3 ruta
+
+        int num = board[row][col];
+
+        // kolla att raden är fri
+        for (int c = 0; c < 9; c++) {
+
+            if (c == col) {
+                continue;
+            }
+
+            if (board[row][c] == num) {
+                return false;
+
+            }
+        }
+
+        // kolla att kolumnen är fri
+        for (int r = 0; r < 9; r++) {
+
+            if (r == row) {
+                continue;
+            }
+
+            if (board[r][col] == num) {
+                return false;
+            }
+        }
+
+        // kolla regionen
+        int startRow = (row / 3) * 3;
+        int startCol = (col / 3) * 3;
+
+        for (int r = startRow; r < startRow + 3; r++) {
+            for (int c = startCol; c < startCol + 3; c++) {
+
+                if (c == col && r == row) {
+                    continue;
+                }
+
+                if (board[r][c] == num) {
+                    return false;
+                }
+
+            }
+        }
+
         return true;
     }
 
     @Override
     public boolean isAllValid() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAllValid'");
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                if (!isValid(r, c)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

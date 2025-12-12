@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -211,4 +212,47 @@ public class TestSolver {
         assertTrue(Arrays.deepEquals(
                 board, solver.getGrid()), "Solver::getGrid and Solver::setGrid should copy the elements.");
     }
+
+    @Test
+    void testShouldNotBeValid() {
+        int[][] board = new int[][] {
+                { 0, 0, 8, 0, 0, 9, 0, 6, 2 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 5 },
+                { 1, 0, 2, 5, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 2, 1, 0, 0, 9, 0 },
+                { 0, 5, 0, 0, 0, 0, 6, 0, 0 },
+                { 6, 0, 0, 0, 0, 0, 0, 2, 8 },
+                { 4, 1, 0, 6, 0, 8, 0, 0, 0 },
+                { 8, 6, 0, 0, 3, 0, 1, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 4, 0, 0 }
+        };
+
+        solver.setGrid(board);
+        solver.set(0, 0, 1);
+        assertFalse(solver.isValid(0, 0));
+    }
+
+    @Test
+    void testShouldBeValid() {
+        int[][] board = new int[][] {
+                { 0, 2, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 2, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        };
+
+        solver.setGrid(board);
+        System.out.println(solver);
+        solver.set(0, 0, 1);
+        solver.set(0, 0, 1);
+        solver.set(0, 4, 3);
+        System.out.println(solver);
+        assertTrue(solver.isValid(0, 4));
+    }
+
 }
