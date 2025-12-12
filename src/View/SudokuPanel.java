@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import model.solver.SudokuSolver;
 import model.solver.MySudokuSolver;
 
-public class SudokuPanel extends JPanel {  
+public class SudokuPanel extends JPanel {
 
     private static final int SIZE = 9;
 
@@ -79,7 +79,7 @@ public class SudokuPanel extends JPanel {
                 String text = cells[r][c].getText().trim();
 
                 if (text.isEmpty()) {
-                    grid[r][c] = 0;   // tom ruta
+                    grid[r][c] = 0; // tom ruta
                 } else {
                     if (!text.matches("[1-9]")) {
                         JOptionPane.showMessageDialog(
@@ -87,8 +87,7 @@ public class SudokuPanel extends JPanel {
                                 "Fel i rad " + (r + 1) + ", kolumn " + (c + 1)
                                         + ". Skriv bara siffrorna 1–9 eller lämna tomt.",
                                 "Felaktig inmatning",
-                                JOptionPane.ERROR_MESSAGE
-                        );
+                                JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     grid[r][c] = Integer.parseInt(text);
@@ -108,16 +107,14 @@ public class SudokuPanel extends JPanel {
                         this,
                         "Ingen lösning hittades.\nProva att ändra några siffror och försök igen.",
                         "Ingen lösning",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(
                     this,
                     "Ett fel uppstod i solvern: " + ex.getMessage(),
                     "Fel",
-                    JOptionPane.ERROR_MESSAGE
-            );
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -139,7 +136,7 @@ public class SudokuPanel extends JPanel {
         try {
             solver.clearAll();
         } catch (Exception e) {
-           
+
         }
     }
 }

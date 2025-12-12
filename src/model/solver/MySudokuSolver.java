@@ -2,6 +2,8 @@ package model.solver;
 
 public class MySudokuSolver implements SudokuSolver {
 
+    private int[][] board = new int[9][9];
+
     @Override
     public boolean solve() {
         // TODO Auto-generated method stub
@@ -34,8 +36,7 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public boolean isValid(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isValid'");
+        return board[row][col] < 10 && board[row][col] >= 0;
     }
 
     @Override
@@ -46,8 +47,23 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public void setGrid(int[][] m) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setGrid'");
+
+        // Checks for proper dimensions (9 by 9)
+        if (m.length != 9 || m[0].length != 9) {
+            throw new IllegalArgumentException();
+        }
+
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+
+                board[row][col] = m[row][col];
+
+                if (!isValid(row, col)) {
+                    throw new IllegalArgumentException();
+                }
+
+            }
+        }
     }
 
     @Override
