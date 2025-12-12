@@ -12,8 +12,9 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public void set(int row, int col, int digit) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+
+        this.board[row][col] = digit;
+
     }
 
     @Override
@@ -37,7 +38,7 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public boolean isValid(int row, int col) {
-        return false;
+        return true;
     }
 
     @Override
@@ -57,11 +58,11 @@ public class MySudokuSolver implements SudokuSolver {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
 
-                board[row][col] = m[row][col];
-
-                if (!isValid(row, col)) {
+                if (!inBounds(m[row][col])) {
                     throw new IllegalArgumentException();
                 }
+
+                board[row][col] = m[row][col];
 
             }
         }
@@ -70,7 +71,18 @@ public class MySudokuSolver implements SudokuSolver {
     @Override
     public int[][] getGrid() {
 
-        return null;
+        int[][] copyOfGrid = new int[9][9];
+
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                copyOfGrid[r][c] = this.board[r][c];
+            }
+        }
+        return copyOfGrid;
+    }
+
+    private boolean inBounds(int num) {
+        return num < 10 && num >= 0;
     }
 
     public String toString() {
