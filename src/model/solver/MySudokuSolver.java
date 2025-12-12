@@ -18,25 +18,26 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public int get(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        return this.board[row][col];
     }
 
     @Override
     public void clear(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+        this.board[row][col] = 0;
     }
 
     @Override
     public void clearAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearAll'");
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                this.board[row][col] = 0;
+            }
+        }
     }
 
     @Override
     public boolean isValid(int row, int col) {
-        return board[row][col] < 10 && board[row][col] >= 0;
+        return false;
     }
 
     @Override
@@ -68,8 +69,40 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public int[][] getGrid() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGrid'");
+
+        return null;
     }
 
+    public String toString() {
+
+        String line = "----------------------";
+
+        StringBuilder sb = new StringBuilder(line);
+
+        for (int row = 0; row < 9; row++) {
+            sb.append("\n");
+            sb.append("|");
+            for (int col = 0; col < 9; col++) {
+
+                int digit = board[row][col];
+
+                if (digit == 0) {
+                    sb.append(" ").append("_");
+                } else {
+                    sb.append(" ").append(digit);
+                }
+
+                if ((col + 1) % 3 == 0) {
+                    sb.append("|");
+                }
+
+            }
+
+            if ((row + 1) % 3 == 0) {
+                sb.append("\n" + line);
+            }
+        }
+
+        return sb.toString();
+    }
 }
