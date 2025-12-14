@@ -55,10 +55,8 @@ public class MySudokuSolver implements SudokuSolver {
                 }
             }
         }
-        if (!isValid(row, col)) {
-            this.clear(row, col);
 
-        }
+        this.clear(row, col);
 
         return false;
         // Om vi gått igenom alla alternativ och ingen siffra passar måste

@@ -1,6 +1,6 @@
 import javax.swing.SwingUtilities;
 
-import View.SudokuFrame;
+import view.SudokuFrame;
 
 public class SudokuSolverApplication {
 
