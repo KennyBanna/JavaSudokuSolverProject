@@ -103,6 +103,7 @@ public class SudokuPanel extends JPanel {
                 int[][] solution = solver.getGrid();
                 showSolution(solution);
             } else {
+                showSolution(solver.getGrid());
                 JOptionPane.showMessageDialog(
                         this,
                         "Ingen lösning hittades.\nProva att ändra några siffror och försök igen.",
@@ -121,7 +122,11 @@ public class SudokuPanel extends JPanel {
     private void showSolution(int[][] solution) {
         for (int r = 0; r < SIZE; r++) {
             for (int c = 0; c < SIZE; c++) {
-                cells[r][c].setText(Integer.toString(solution[r][c]));
+                String number = Integer.toString(solution[r][c]);
+                if (number.equals("0")) {
+                    number = "";
+                }
+                cells[r][c].setText(number);
             }
         }
     }

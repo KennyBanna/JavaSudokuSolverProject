@@ -2,7 +2,8 @@ package model.solver;
 
 public class MySudokuSolver implements SudokuSolver {
 
-    private int[][] board = new int[9][9];
+    private static int SIZE = 9;
+    private int[][] board = new int[SIZE][SIZE];
 
     @Override
     public boolean solve() {
@@ -10,15 +11,59 @@ public class MySudokuSolver implements SudokuSolver {
             return false;
         }
 
-        for (int i = 1; i <= 9; i++) {
-
-        }
-        return true;
+        return solve(0, 0);
     }
 
     // rekursiv hjälpmetod
     private boolean solve(int row, int col) {
+
+        // Basfall
+        if (row >= 8 && col >= 8 && get(8, 8) != 0) {
+            return isValid(8, 8);
+        }
+
+        // Sparar nästa ruta i variabler
+        int nextCol, nextRow;
+        if (col == 8) {
+            nextCol = 0;
+            nextRow = row + 1;
+        } else {
+            nextCol = col + 1;
+            nextRow = row;
+        }
+        if (row == 8) {
+            nextRow = 8;
+        }
+
+        // --- VAL ---
+        // sätt ut en siffra (om inte siffra finns)
+        if (get(row, col) != 0) {
+            if (solve(nextRow, nextCol)) {
+                return true;
+            }
+        } else {
+
+            for (int d = 1; d <= SIZE; d++) { // Vi prövar sätta ut varje siffra
+
+                set(row, col, d);
+
+                if (isValid(row, col)) {
+                    // Varje siffra gör ett rekursivt call
+                    if (solve(nextRow, nextCol)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (!isValid(row, col)) {
+            this.clear(row, col);
+
+        }
+
         return false;
+        // Om vi gått igenom alla alternativ och ingen siffra passar måste
+        // Vi backtracka
+
     }
 
     @Override
@@ -40,8 +85,8 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public void clearAll() {
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
                 this.board[row][col] = 0;
             }
         }
@@ -53,9 +98,12 @@ public class MySudokuSolver implements SudokuSolver {
         // dvs om den är unik i rad, kolumn och 3x3 ruta
 
         int num = board[row][col];
+        if (num == 0) {
+            return true;
+        }
 
         // kolla att raden är fri
-        for (int c = 0; c < 9; c++) {
+        for (int c = 0; c < SIZE; c++) {
 
             if (c == col) {
                 continue;
@@ -68,7 +116,7 @@ public class MySudokuSolver implements SudokuSolver {
         }
 
         // kolla att kolumnen är fri
-        for (int r = 0; r < 9; r++) {
+        for (int r = 0; r < SIZE; r++) {
 
             if (r == row) {
                 continue;
@@ -102,8 +150,8 @@ public class MySudokuSolver implements SudokuSolver {
 
     @Override
     public boolean isAllValid() {
-        for (int r = 0; r < 9; r++) {
-            for (int c = 0; c < 9; c++) {
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
                 if (!isValid(r, c)) {
                     return false;
                 }
@@ -115,13 +163,13 @@ public class MySudokuSolver implements SudokuSolver {
     @Override
     public void setGrid(int[][] m) {
 
-        // Checks for proper dimensions (9 by 9)
-        if (m.length != 9 || m[0].length != 9) {
+        // Checks for proper dimensions (SIZE by SIZE)
+        if (m.length != SIZE || m[0].length != SIZE) {
             throw new IllegalArgumentException();
         }
 
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
 
                 if (!inBounds(m[row][col])) {
                     throw new IllegalArgumentException();
@@ -136,10 +184,10 @@ public class MySudokuSolver implements SudokuSolver {
     @Override
     public int[][] getGrid() {
 
-        int[][] copyOfGrid = new int[9][9];
+        int[][] copyOfGrid = new int[SIZE][SIZE];
 
-        for (int r = 0; r < 9; r++) {
-            for (int c = 0; c < 9; c++) {
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
                 copyOfGrid[r][c] = this.board[r][c];
             }
         }
@@ -156,10 +204,10 @@ public class MySudokuSolver implements SudokuSolver {
 
         StringBuilder sb = new StringBuilder(line);
 
-        for (int row = 0; row < 9; row++) {
+        for (int row = 0; row < SIZE; row++) {
             sb.append("\n");
             sb.append("|");
-            for (int col = 0; col < 9; col++) {
+            for (int col = 0; col < SIZE; col++) {
 
                 int digit = board[row][col];
 

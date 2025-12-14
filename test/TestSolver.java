@@ -153,6 +153,26 @@ public class TestSolver {
         }
     }
 
+    @Test
+    public void shouldSolveEmptyBoard() {
+        int[][] board = new int[][] {
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        };
+
+        solver.setGrid(board);
+        boolean solved = solver.solve();
+        System.out.println(solver);
+        assertTrue(solved);
+    }
+
     /**
      * Makes sure that consecutive calls to getGrid yields different copies of the
      * board.
@@ -247,11 +267,9 @@ public class TestSolver {
         };
 
         solver.setGrid(board);
-        System.out.println(solver);
         solver.set(0, 0, 1);
         solver.set(0, 0, 1);
         solver.set(0, 4, 3);
-        System.out.println(solver);
         assertTrue(solver.isValid(0, 4));
     }
 
