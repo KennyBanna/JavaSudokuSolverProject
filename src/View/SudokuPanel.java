@@ -38,7 +38,7 @@ public class SudokuPanel extends JPanel {
                 if (((r / 3) + (c / 3)) % 2 == 0) {
                     tf.setBackground(new Color(230, 230, 230));
                 } else {
-                    tf.setBackground(Color.WHITE);
+                    tf.setBackground(Color.ORANGE);
                 }
 
                 cells[r][c] = tf;
