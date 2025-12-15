@@ -118,7 +118,8 @@ public class TestSolver {
         };
 
         solver.setGrid(board);
-        solver.solve();
+
+        assertTrue(solver.solve());
         assertTrue(
                 Arrays.deepEquals(board, board2),
                 "Solver::setGrid should copy the elements of the board and not the references to the arrays. " +
